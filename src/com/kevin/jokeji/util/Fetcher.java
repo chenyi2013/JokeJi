@@ -1,195 +1,196 @@
 package com.kevin.jokeji.util;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
+import com.kevin.jokeji.beans.Category;
+import com.kevin.jokeji.beans.Joke;
+import com.kevin.jokeji.beans.JokeItem;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.kevin.jokeji.beans.Category;
-import com.kevin.jokeji.beans.Joke;
-import com.kevin.jokeji.beans.JokeItem;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class Fetcher {
 
-	public static ArrayList<Joke> getJokes(String url) {
+    public static ArrayList<Joke> getJokes(String url) {
 
-		ArrayList<Joke> jokes = new ArrayList<Joke>();
-		Joke joke = null;
+        ArrayList<Joke> jokes = new ArrayList<Joke>();
+        Joke joke = null;
 
-		try {
-			Document doc = Jsoup.connect(url).timeout(5000).get();
+        try {
+            Document doc = Jsoup.connect(url).timeout(5000).get();
 
-			Element content = doc.getElementsByClass("list_title").get(0);
+            Element content = doc.getElementsByClass("list_title").get(0);
 
-			Elements lis = content.getElementsByTag("li");
+            Elements lis = content.getElementsByTag("li");
 
-			for (Element li : lis) {
+            for (Element li : lis) {
 
-				joke = new Joke();
+                joke = new Joke();
 
-				joke.setTitle(li.child(0).child(0).text());
-				joke.setUrl(li.child(0).child(0).attr("href"));
+                joke.setTitle(li.child(0).child(0).text());
+                joke.setUrl(li.child(0).child(0).attr("href"));
 
-				joke.setCount(li.child(1).text());
-				joke.setData(li.child(2).text());
+                joke.setCount(li.child(1).text());
+                joke.setData(li.child(2).text());
 
-				jokes.add(joke);
+                jokes.add(joke);
 
-			}
+            }
 
-			return jokes;
+            return jokes;
 
-		} catch (IOException e) {
-		}
-		return null;
-	}
+        } catch (IOException e) {
+        }
+        return null;
+    }
 
-	public static String getJoke(String url) {
+    public static String getJoke(String url) {
 
-		try {
+        try {
 
-			String str = URLEncoder.encode("¿‰–¶ª∞", "utf-8");
-			url = url.replace("¿‰–¶ª∞", str);
-			Document doc = Jsoup.connect(url).timeout(5000).get();
+            String str = URLEncoder.encode("ÂÜ∑Á¨ëËØù", "utf-8");
+            url = url.replace("ÂÜ∑Á¨ëËØù", str);
+            Document doc = Jsoup.connect(url).timeout(5000).get();
 
-			Element element = doc.getElementById("text110");
+            Element element = doc.getElementById("text110");
 
-			return element.html();
+            return element.html();
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		return null;
+        return null;
 
-	}
+    }
 
-	public static ArrayList<Category> getCategorys(String url) {
+    public static ArrayList<Category> getCategorys(String url) {
 
-		ArrayList<Category> categorys = new ArrayList<Category>();
-		Category category = null;
+        ArrayList<Category> categorys = new ArrayList<Category>();
+        Category category = null;
 
-		try {
+        try {
 
-			Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(5000).get();
 
-			Element element = doc.getElementById("classlist");
+            Element element = doc.getElementById("classlist");
 
-			Elements elements = element.getElementsByTag("a");
+            Elements elements = element.getElementsByTag("a");
 
-			for (Element a : elements) {
+            for (Element a : elements) {
 
-				category = new Category();
-				category.setTitle(a.text());
-				category.setUrl(a.attr("href"));
-				categorys.add(category);
+                category = new Category();
+                category.setTitle(a.text());
+                category.setUrl(a.attr("href"));
+                categorys.add(category);
 
-			}
+            }
 
-			return categorys;
+            return categorys;
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		return null;
+        return null;
 
-	}
+    }
 
-	public static ArrayList<Joke> getRanks(String url) {
+    public static ArrayList<Joke> getRanks(String url) {
 
-		ArrayList<Joke> jokes = new ArrayList<Joke>();
-		Joke joke = null;
+        ArrayList<Joke> jokes = new ArrayList<Joke>();
+        Joke joke = null;
 
-		try {
+        try {
 
-			Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(5000).get();
 
-			Elements elements = doc.getElementsByClass("main_14");
+            Elements elements = doc.getElementsByClass("main_14");
 
-			for (Element a : elements) {
+            for (Element a : elements) {
 
-				joke = new Joke();
-				joke.setTitle(a.text());
-				joke.setUrl(a.attr("href"));
-				joke.setCount(a.parent().parent().child(2).text());
-				joke.setData(a.parent().parent().child(3).text());
-				jokes.add(joke);
+                joke = new Joke();
+                joke.setTitle(a.text());
+                joke.setUrl(a.attr("href"));
+                joke.setCount(a.parent().parent().child(2).text());
+                joke.setData(a.parent().parent().child(3).text());
+                jokes.add(joke);
 
-			}
+            }
 
-			return jokes;
+            return jokes;
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		return null;
+        return null;
 
-	}
+    }
 
-	public static ArrayList<JokeItem> getAwards(String url) {
+    public static ArrayList<JokeItem> getAwards(String url) {
 
-		ArrayList<JokeItem> jokes = new ArrayList<JokeItem>();
-		JokeItem joke = null;
+        ArrayList<JokeItem> jokes = new ArrayList<JokeItem>();
+        JokeItem joke = null;
 
-		int sectionPosition = 0;
-		int listPosition = 0;
+        int sectionPosition = 0;
+        int listPosition = 0;
 
-		try {
+        try {
 
-			Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(5000).get();
 
-			Element element = doc.getElementsByClass("jokeall_main").get(0);
+            Element element = doc.getElementsByClass("jokeall_main").get(0);
 
-			Elements h2s = element.getElementsByTag("h2");
+            Elements h2s = element.getElementsByTag("h2");
 
-			String key = null;
-			String uri = null;
+            String key = null;
+            String uri = null;
 
-			for (Element e : h2s) {
+            for (Element e : h2s) {
 
-				key = e.child(0).text();
-				uri = e.child(0).attr("href");
+                key = e.child(0).text();
+                uri = e.child(0).attr("href");
 
-				joke = new JokeItem(JokeItem.SECTION);
-				joke.sectionPosition = sectionPosition++;
-				joke.listPosition = listPosition++;
-				joke.setTitle(key);
-				jokes.add(joke);
+                joke = new JokeItem(JokeItem.SECTION);
+                joke.sectionPosition = sectionPosition++;
+                joke.listPosition = listPosition++;
+                joke.setTitle(key);
+                jokes.add(joke);
 
-				Elements uls = e.parent().parent().getElementsByTag("ul")
-						.get(0).getElementsByTag("li");
-				for (Element li : uls) {
+                Elements uls = e.parent().parent().getElementsByTag("ul")
+                        .get(0).getElementsByTag("li");
+                for (Element li : uls) {
 
-					joke = new JokeItem(JokeItem.ITEM);
+                    joke = new JokeItem(JokeItem.ITEM);
 
-					joke.setTitle(li.child(0).text());
-					joke.setUrl(li.child(0).attr("href"));
-					joke.setCount(li.child(1).text());
+                    joke.setTitle(li.child(0).text());
+                    joke.setUrl(li.child(0).attr("href"));
+                    joke.setCount(li.child(1).text());
 
-					jokes.add(joke);
+                    jokes.add(joke);
 
-				}
+                }
 
-				joke = new JokeItem(JokeItem.MORE);
+                joke = new JokeItem(JokeItem.MORE);
 
-				joke.setTitle("≤Èø¥∏¸∂‡");
-				joke.setUrl(uri);
-				jokes.add(joke);
+                joke.setTitle("Êü•ÁúãÊõ¥Â§ö");
+                joke.setUrl(uri);
+                jokes.add(joke);
 
-			}
+            }
 
-			return jokes;
+            return jokes;
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		return null;
+        return null;
 
-	}
+    }
 }

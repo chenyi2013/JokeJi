@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +37,9 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 	private JokeAdapter mAdapter;
 	private DiskLruCache mDiskLruCache = null;
 	private JokeApplication mApplication;
+	private boolean isRefresh = false;
+
+	SwipeRefreshLayout mRefreshLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -62,8 +67,30 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 		mAdapter = new JokeAdapter();
 
 		mJokeListView = (ListView) getView().findViewById(R.id.joke_list_view);
+		View footer = getActivity().getLayoutInflater().inflate(
+				R.layout.more_item, mJokeListView, false);
+		mJokeListView.addFooterView(footer);
 		mJokeListView.setOnItemClickListener(this);
 		mJokeListView.setAdapter(mAdapter);
+
+		mRefreshLayout = (SwipeRefreshLayout) getView()
+				.findViewById(R.id.swipe);
+
+		mRefreshLayout.setColorSchemeResources(R.color.holo_red_light,
+				R.color.holo_green_light,
+				R.color.holo_blue_bright,
+				R.color.holo_orange_light);
+		mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+
+			@Override
+			public void onRefresh() {
+
+				mRefreshLayout.setRefreshing(true);
+				isRefresh = true;
+				loadData();
+
+			}
+		});
 
 	}
 
@@ -72,12 +99,17 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 		if (bundle != null) {
 
 			String url = bundle.getString(URL);
-			mJokes = CacheHelper.getObjectToDisk(mDiskLruCache, url);
-			if (mJokes != null) {
-				mAdapter.bindData(mJokes);
-				mAdapter.notifyDataSetChanged();
-			} else {
+
+			if (isRefresh) {
 				new JokeAnsycTask().execute(url);
+			} else {
+				mJokes = CacheHelper.getObjectToDisk(mDiskLruCache, url);
+				if (mJokes != null) {
+					mAdapter.bindData(mJokes);
+					mAdapter.notifyDataSetChanged();
+				} else {
+					new JokeAnsycTask().execute(url);
+				}
 			}
 
 		}
@@ -88,9 +120,14 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
-		Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
-		intent.putExtra(JokeDetailActivity.JOKE, mJokes.get(position));
-		startActivity(intent);
+		if (position < mJokes.size() - 1 + mJokeListView.getFooterViewsCount()) {
+			Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
+			intent.putExtra(JokeDetailActivity.JOKE, mJokes.get(position));
+			startActivity(intent);
+		} else if (position == mJokes.size() - 1
+				+ mJokeListView.getFooterViewsCount()) {
+
+		}
 
 	}
 
@@ -113,6 +150,8 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 		@Override
 		protected void onPostExecute(ArrayList<Joke> result) {
 			mJokes = result;
+			isRefresh = false;
+			mRefreshLayout.setRefreshing(false);
 			mAdapter.bindData(mJokes);
 			mAdapter.notifyDataSetChanged();
 		}

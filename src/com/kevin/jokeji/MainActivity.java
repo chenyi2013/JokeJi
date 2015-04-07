@@ -1,16 +1,19 @@
 package com.kevin.jokeji;
 
-import com.kevin.jokeji.fragment.NewFragment;
-import com.kevin.jokeji.fragment.TextFragment;
-
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+
+import com.kevin.jokeji.fragment.NewFragment;
+import com.kevin.jokeji.fragment.TextFragment;
 
 public class MainActivity extends ActionBarActivity implements
 		OnCheckedChangeListener {
@@ -30,6 +33,17 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 	private void initView() {
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+
+
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#33B5E5"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
 		mBottomMenu = (RadioGroup) findViewById(R.id.bottom_menu);
 		mBottomMenu.setOnCheckedChangeListener(this);
 
