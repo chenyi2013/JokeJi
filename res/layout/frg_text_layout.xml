@@ -8,31 +8,40 @@
         android:id="@+id/top_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:orientation="horizontal" >
 
         <RadioButton
+            android:id="@+id/category_radio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:layout_weight="1"
+            android:background="@drawable/vpi__tab_indicator"
             android:button="@null"
             android:gravity="center"
+            android:padding="10dp"
             android:text="分类" />
 
         <RadioButton
+            android:id="@+id/rank_radio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/vpi__tab_indicator"
             android:button="@null"
             android:gravity="center"
+            android:padding="10dp"
             android:text="排行" />
 
         <RadioButton
+            android:id="@+id/award_radio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/vpi__tab_indicator"
             android:button="@null"
             android:gravity="center"
+            android:padding="10dp"
             android:text="风云榜" />
     </RadioGroup>
 
