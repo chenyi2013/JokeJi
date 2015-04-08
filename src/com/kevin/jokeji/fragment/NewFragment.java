@@ -1,7 +1,5 @@
 package com.kevin.jokeji.fragment;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +24,8 @@ import com.kevin.jokeji.cache.CacheHelper;
 import com.kevin.jokeji.cache.DiskLruCache;
 import com.kevin.jokeji.util.Fetcher;
 
+import java.util.ArrayList;
+
 public class NewFragment extends Fragment implements OnItemClickListener {
 
 	public static final String URL = "url";
@@ -47,6 +47,7 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 		mInflater = inflater;
 		return inflater.inflate(R.layout.frg_new_layout, container, false);
 	}
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,9 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
+        if(mJokes == null){
+            return ;
+        }
 		if (position < mJokes.size() - 1 + mJokeListView.getFooterViewsCount()) {
 			Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
 			intent.putExtra(JokeDetailActivity.JOKE, mJokes.get(position));
@@ -152,8 +156,10 @@ public class NewFragment extends Fragment implements OnItemClickListener {
 			mJokes = result;
 			isRefresh = false;
 			mRefreshLayout.setRefreshing(false);
-			mAdapter.bindData(mJokes);
-			mAdapter.notifyDataSetChanged();
+            if(mJokes != null){
+                mAdapter.bindData(mJokes);
+                mAdapter.notifyDataSetChanged();
+            }
 		}
 
 	}
