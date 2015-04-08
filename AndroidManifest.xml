@@ -14,12 +14,11 @@
         android:allowBackup="true"
         android:name="com.kevin.jokeji.JokeApplication"
         android:icon="@drawable/logo"
+        android:theme="@style/CustomActionBarTheme"
         android:label="@string/app_name"
         >
         <activity
             android:name=".MainActivity"
-            android:icon="@drawable/logo"
-            android:theme="@style/Theme.AppCompat.Light"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,12 +26,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name=".JokeDetailActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:theme="@style/Theme.AppCompat.Light"
             android:name=".JokeListActivity"
             android:label="@string/app_name" >
         </activity>

@@ -25,9 +25,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="true"
             android:button="@null"
             android:drawableTop="@drawable/new_icon"
             android:gravity="center"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:text="最新" />
 
         <RadioButton
@@ -37,6 +39,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/text"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:gravity="center"
             android:text="文字" />
 
@@ -46,6 +49,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/img"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:gravity="center"
             android:text="图片" />
 
@@ -55,6 +59,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@drawable/quip"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:gravity="center"
             android:text="名言" />
     </RadioGroup>

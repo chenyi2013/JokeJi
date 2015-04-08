@@ -15,6 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:layout_weight="1"
             android:background="@drawable/vpi__tab_indicator"
             android:button="@null"
@@ -27,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:background="@drawable/vpi__tab_indicator"
             android:button="@null"
             android:gravity="center"
@@ -41,6 +43,7 @@
             android:background="@drawable/vpi__tab_indicator"
             android:button="@null"
             android:gravity="center"
+            android:textColor="@drawable/bottom_menu_color_list"
             android:padding="10dp"
             android:text="风云榜" />
     </RadioGroup>
