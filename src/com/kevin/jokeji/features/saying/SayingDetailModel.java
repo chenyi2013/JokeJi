@@ -1,6 +1,6 @@
 package com.kevin.jokeji.features.saying;
 
-import com.kevin.jokeji.features.base.CommonModel;
+import com.kevin.jokeji.features.base.HtmlCommonModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by kevin on 17/3/3.
  */
 
-public class SayingDetailModel extends CommonModel<ArrayList<String>> {
+public class SayingDetailModel extends HtmlCommonModel<ArrayList<String>> {
 
     @Override
     public ArrayList<String> getData(String ulr) {

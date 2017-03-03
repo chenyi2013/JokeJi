@@ -1,7 +1,7 @@
 package com.kevin.jokeji.features.image;
 
 import com.kevin.jokeji.beans.Image;
-import com.kevin.jokeji.features.base.CommonModel;
+import com.kevin.jokeji.features.base.HtmlCommonModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by kevin on 17/3/2.
  */
 
-public class ImageModel extends CommonModel<ArrayList<Image>> {
+public class ImageModel extends HtmlCommonModel<ArrayList<Image>> {
 
     @Override
     public ArrayList<Image> getData(String url) {

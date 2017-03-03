@@ -28,6 +28,6 @@ public class CommonPresenter<T> implements BasePresenter<T> {
 
     @Override
     public void onError(Exception exception) {
-
+        baseView.showError();
     }
 }

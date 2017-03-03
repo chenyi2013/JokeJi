@@ -15,7 +15,7 @@ import rx.schedulers.Schedulers;
  * Created by kevin on 17/3/2.
  */
 
-public abstract class CommonModel<T> implements BaseModel<T> {
+public abstract class HtmlCommonModel<T> implements BaseModel<T> {
 
     protected BasePresenter<T> commonPresenter;
 

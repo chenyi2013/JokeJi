@@ -1,10 +1,12 @@
 package com.kevin.jokeji.beans;
 
+import java.io.Serializable;
+
 /**
  * Created by kevin on 17/3/2.
  */
 
-public class Saying {
+public class Saying implements Serializable{
 
     String title;
     String url;

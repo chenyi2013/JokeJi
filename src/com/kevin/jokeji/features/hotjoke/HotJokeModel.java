@@ -1,7 +1,7 @@
 package com.kevin.jokeji.features.hotjoke;
 
 import com.kevin.jokeji.beans.Joke;
-import com.kevin.jokeji.features.base.CommonModel;
+import com.kevin.jokeji.features.base.HtmlCommonModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by kevin on 17/3/2.
  */
 
-public class HotJokeModel extends CommonModel<ArrayList<Joke>> {
+public class HotJokeModel extends HtmlCommonModel<ArrayList<Joke>> {
 
     HotJokeModel() {
         super();
