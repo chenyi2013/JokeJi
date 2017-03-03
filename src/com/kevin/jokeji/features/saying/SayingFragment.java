@@ -39,7 +39,7 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
     @Override
     protected void loadData() {
 
-        presenter.loadData("https://www.susu19.com/htm/piclist6/");
+        presenter.loadData("https://www.susu19.com/htm/piclist6/",true);
 
     }
 
@@ -63,7 +63,7 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
 
 
     @Override
-    public void showData(ArrayList<Saying> sayings) {
+    public void showData(ArrayList<Saying> sayings,boolean isRefresh) {
 
         mListView.setAdapter(new CommonAdapter<Saying>(getActivity(), android.R.layout.simple_list_item_1, sayings) {
             @Override

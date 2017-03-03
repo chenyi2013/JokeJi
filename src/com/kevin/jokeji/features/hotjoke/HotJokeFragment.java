@@ -35,6 +35,8 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     BGARefreshLayout mRefreshLayout;
     private CommonPresenter<ArrayList<Joke>> mPresenter;
 
+    private String url;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,22 +48,18 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     protected void initView() {
         mAdapter = new JokeAdapter();
 
-        mJokeListView = (ListView) getView().findViewById(R.id.joke_list_view);
-//        View footer = getActivity().getLayoutInflater().inflate(
-//                R.layout.more_item, mJokeListView, false);
-//        mJokeListView.addFooterView(footer);
+        mJokeListView = findViewById(R.id.joke_list_view);
+
         mJokeListView.setOnItemClickListener(this);
         mJokeListView.setAdapter(mAdapter);
 
-        mRefreshLayout = (BGARefreshLayout) getView()
-                .findViewById(R.id.pull_to_refresh);
+        mRefreshLayout = findViewById(R.id.pull_to_refresh);
 
 
         BGAMeiTuanRefreshViewHolder meiTuanRefreshViewHolder = new BGAMeiTuanRefreshViewHolder(getActivity(), true);
         meiTuanRefreshViewHolder.setPullDownImageResource(R.drawable.logo);
         meiTuanRefreshViewHolder.setChangeToReleaseRefreshAnimResId(R.drawable.bga_refresh_mt_refreshing);
         meiTuanRefreshViewHolder.setRefreshingAnimResId(R.drawable.bga_refresh_mt_refreshing);
-
         mRefreshLayout.setRefreshViewHolder(meiTuanRefreshViewHolder);
 
     }
@@ -85,8 +83,8 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     protected void loadData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            String url = bundle.getString(URL);
-            mPresenter.loadData(url);
+            url = bundle.getString(URL);
+            mPresenter.loadData(url, true);
         }
 
     }
@@ -117,13 +115,20 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     }
 
     @Override
-    public void showData(ArrayList<Joke> jokes) {
+    public void showData(ArrayList<Joke> jokes, boolean isRefresh) {
+
         mRefreshLayout.endLoadingMore();
         mRefreshLayout.endRefreshing();
-        if (jokes != null) {
+
+        if (isRefresh) {
+            mAdapter.setData(jokes);
+        } else {
             mAdapter.bindData(jokes);
-            mAdapter.notifyDataSetChanged();
         }
+
+        mAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override
@@ -138,7 +143,9 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        loadData();
+        if (url != null) {
+            mPresenter.loadData(url, false);
+        }
         return true;
     }
 
@@ -159,6 +166,12 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
                 this.jokes.addAll(jokes);
             }
 
+        }
+
+        public void setData(ArrayList<Joke> jokes) {
+            if (jokes != null) {
+                this.jokes = jokes;
+            }
         }
 
         @Override

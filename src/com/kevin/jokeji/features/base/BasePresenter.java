@@ -6,9 +6,9 @@ package com.kevin.jokeji.features.base;
 
 public interface BasePresenter<T> {
 
-    void loadData(String url);
+    void loadData(String url,boolean isRefresh);
 
-    void onGetData(T t);
+    void onGetData(T t,boolean isRefresh);
 
     void onError(Exception exception);
 }

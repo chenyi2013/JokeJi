@@ -13,11 +13,16 @@ import com.kevin.jokeji.features.base.CommonPresenter;
 
 import java.util.ArrayList;
 
-public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Image>> {
+import cn.bingoogolapple.refreshlayout.BGAMeiTuanRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+
+public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Image>>, BGARefreshLayout.BGARefreshLayoutDelegate {
 
     private ListView mListView;
     private CommonPresenter<ArrayList<Image>> mPresenter;
     private CommonAdapter<Image> imageCommonAdapter;
+    private BGARefreshLayout mRefreshLayout;
+
 
     public ImageFragment() {
     }
@@ -25,9 +30,21 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
     @Override
     protected void initView() {
         mListView = findViewById(R.id.list_view);
+        mRefreshLayout = findViewById(R.id.pull_to_refresh);
         mListView.setAdapter(imageCommonAdapter = new ImageAdapter(getActivity(), R.layout.image_item, null));
 
+        BGAMeiTuanRefreshViewHolder meiTuanRefreshViewHolder = new BGAMeiTuanRefreshViewHolder(getActivity(), true);
+        meiTuanRefreshViewHolder.setPullDownImageResource(R.drawable.logo);
+        meiTuanRefreshViewHolder.setChangeToReleaseRefreshAnimResId(R.drawable.bga_refresh_mt_refreshing);
+        meiTuanRefreshViewHolder.setRefreshingAnimResId(R.drawable.bga_refresh_mt_refreshing);
+        mRefreshLayout.setRefreshViewHolder(meiTuanRefreshViewHolder);
 
+
+    }
+
+    @Override
+    protected void setListener() {
+        mRefreshLayout.setDelegate(this);
     }
 
     @Override
@@ -37,7 +54,7 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
 
     @Override
     protected void loadData() {
-        mPresenter.loadData(URLS.IMAGES_URL);
+        mPresenter.loadData(URLS.IMAGES_URL, true);
     }
 
     @Override
@@ -47,8 +64,15 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
 
 
     @Override
-    public void showData(ArrayList<Image> images) {
-        imageCommonAdapter.setData(images);
+    public void showData(ArrayList<Image> images, boolean isRefresh) {
+        mRefreshLayout.endRefreshing();
+        mRefreshLayout.endLoadingMore();
+        if (isRefresh) {
+            imageCommonAdapter.setData(images);
+        } else {
+            imageCommonAdapter.appendData(images);
+        }
+
         imageCommonAdapter.notifyDataSetChanged();
 
     }
@@ -56,5 +80,16 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
     @Override
     public void showError() {
 
+    }
+
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        loadData();
+    }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        mPresenter.loadData(URLS.IMAGES_URL, false);
+        return true;
     }
 }

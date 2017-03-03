@@ -6,6 +6,6 @@ package com.kevin.jokeji.features.base;
 
 public interface BaseModel<T> {
 
-    void loadData(String url);
+    void loadData(String url,boolean isRefresh);
     void setPresenter(BasePresenter<T> presenter);
 }

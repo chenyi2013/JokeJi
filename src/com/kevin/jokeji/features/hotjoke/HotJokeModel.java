@@ -21,6 +21,16 @@ public class HotJokeModel extends HtmlCommonModel<ArrayList<Joke>> {
         super();
     }
 
+
+    @Override
+    public String formatUrlForPageId(String url, int page) {
+
+        if (url.matches(".+" + "\\_[0-9]+\\.htm$")) {
+            return url.replaceAll("\\_[0-9]+\\.htm$", "_" + page + ".htm");
+        }
+        return url.replace(".htm", "_" + page + ".htm");
+    }
+
     @Override
     public ArrayList<Joke> getData(String url) {
 

@@ -6,6 +6,6 @@ package com.kevin.jokeji.features.base;
 
 public interface BaseView<T> {
 
-    void showData(T t);
+    void showData(T t,boolean isRefresh);
     void showError();
 }

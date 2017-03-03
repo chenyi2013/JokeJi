@@ -17,13 +17,13 @@ public class CommonPresenter<T> implements BasePresenter<T> {
 
 
     @Override
-    public void loadData(String url) {
-        baseModel.loadData(url);
+    public void loadData(String url, boolean isRefresh) {
+        baseModel.loadData(url, isRefresh);
     }
 
     @Override
-    public void onGetData(T t) {
-        baseView.showData(t);
+    public void onGetData(T t, boolean isRefresh) {
+        baseView.showData(t, isRefresh);
     }
 
     @Override

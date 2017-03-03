@@ -83,15 +83,16 @@ public abstract class BaseFragment extends Fragment {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
 
+        initData();
+        initView();
+        setListener();
+
         return relativeLayout;
     }
 
     @Override
     public final void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initData();
-        initView();
-        setListener();
         loadData();
     }
 

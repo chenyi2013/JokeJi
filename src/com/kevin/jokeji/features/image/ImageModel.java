@@ -1,5 +1,7 @@
 package com.kevin.jokeji.features.image;
 
+import android.util.Log;
+
 import com.kevin.jokeji.beans.Image;
 import com.kevin.jokeji.features.base.HtmlCommonModel;
 
@@ -17,6 +19,14 @@ import java.util.ArrayList;
  */
 
 public class ImageModel extends HtmlCommonModel<ArrayList<Image>> {
+
+    @Override
+    public String formatUrlForPageId(String url, int page) {
+
+        Log.i("mq",url + "/index_" + page + ".html");
+
+        return url + "/index_" + page + ".html";
+    }
 
     @Override
     public ArrayList<Image> getData(String url) {
@@ -65,7 +75,7 @@ public class ImageModel extends HtmlCommonModel<ArrayList<Image>> {
                 images.add(image);
 
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

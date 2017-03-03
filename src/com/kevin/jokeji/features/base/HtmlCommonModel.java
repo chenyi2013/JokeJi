@@ -3,8 +3,6 @@ package com.kevin.jokeji.features.base;
 import com.kevin.jokeji.JokeApplication;
 import com.kevin.jokeji.cache.CacheHelper;
 
-import java.util.ArrayList;
-
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -18,6 +16,7 @@ import rx.schedulers.Schedulers;
 public abstract class HtmlCommonModel<T> implements BaseModel<T> {
 
     protected BasePresenter<T> commonPresenter;
+    private int page = 1;
 
     @Override
     public void setPresenter(BasePresenter<T> presenter) {
@@ -27,8 +26,17 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
     public abstract T getData(String url);
 
 
-    final public void loadData(String url) {
+    public String formatUrlForPageId(String url, int page) {
+        return url;
+    }
+
+
+    final public void loadData(String url, final boolean isRefresh) {
         try {
+
+            if (isRefresh) {
+                page = 1;
+            }
 
 //            T data = (T) CacheHelper.getObjectToDisk(JokeApplication.getDiskLruCache(), url);
 //
@@ -44,7 +52,7 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
 
 
             Observable
-                    .just(url)
+                    .just(formatUrlForPageId(url, page))
                     .map(new Func1<String, T>() {
                         @Override
                         public T call(String url) {
@@ -60,7 +68,8 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
                     .subscribe(new Action1<T>() {
                         @Override
                         public void call(T t) {
-                            commonPresenter.onGetData(t);
+                            page++;
+                            commonPresenter.onGetData(t, isRefresh);
                         }
                     });
 

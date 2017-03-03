@@ -14,6 +14,6 @@ public class URLS {
 	// Ц�����ư�url
 	public static final String AWARDS_URL = "http://www.jokeji.cn/joke_top.htm";
 
-	public static final String IMAGES_URL = "http://www.caoliu1.com/pic";
+	public static final String IMAGES_URL = "http://www.caoliu1.com";
 
 }

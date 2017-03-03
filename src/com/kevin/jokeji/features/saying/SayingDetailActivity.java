@@ -32,7 +32,7 @@ public class SayingDetailActivity extends BaseActivity implements BaseView<Array
 
         String url = getIntent().getStringExtra(URL);
         if (url != null) {
-            presenter.loadData(url);
+            presenter.loadData(url,true);
         }
 
 
@@ -54,7 +54,7 @@ public class SayingDetailActivity extends BaseActivity implements BaseView<Array
     }
 
     @Override
-    public void showData(final ArrayList<String> strings) {
+    public void showData(final ArrayList<String> strings,boolean isRefresh) {
 
         listView.setAdapter(new CommonAdapter<String>(this, R.layout.saying_detail_item, strings) {
             @Override
