@@ -17,6 +17,13 @@ import java.util.ArrayList;
  */
 
 public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
+
+
+    @Override
+    public String formatUrlForPageId(String url, int page) {
+        return url + page + ".htm";
+    }
+
     @Override
     public ArrayList<Saying> getData(String url) {
 
@@ -39,7 +46,7 @@ public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
 
                 saying = new Saying();
                 saying.setTitle(element.ownText());
-                saying.setUrl("http://"+new URL(url).getHost() + element.attr("href"));
+                saying.setUrl("http://" + new URL(url).getHost() + element.attr("href"));
                 sayings.add(saying);
             }
 

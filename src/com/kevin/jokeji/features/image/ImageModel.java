@@ -23,8 +23,6 @@ public class ImageModel extends HtmlCommonModel<ArrayList<Image>> {
     @Override
     public String formatUrlForPageId(String url, int page) {
 
-        Log.i("mq",url + "/index_" + page + ".html");
-
         return url + "/index_" + page + ".html";
     }
 
