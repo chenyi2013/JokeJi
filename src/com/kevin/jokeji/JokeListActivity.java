@@ -3,42 +3,48 @@ package com.kevin.jokeji;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 
+import com.kevin.jokeji.base.BaseActivity;
 import com.kevin.jokeji.config.URLS;
-import com.kevin.jokeji.fragment.NewFragment;
+import com.kevin.jokeji.features.hotjoke.HotJokeFragment;
 
-public class JokeListActivity extends ActionBarActivity {
+public class JokeListActivity extends BaseActivity {
 
-	public static final String CATEGORY = "category";
+    public static final String CATEGORY = "category";
 
-	private FragmentManager mManager;
-	private NewFragment mFragment;
+    private FragmentManager mManager;
+    private HotJokeFragment mFragment;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_joke_list);
+    @Override
+    protected void loadData() {
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setLogo(R.drawable.logo);
-        actionBar.setDisplayUseLogoEnabled(true);
+    }
 
-		mManager = getSupportFragmentManager();
-		Intent intent = getIntent();
-		if (intent != null && intent.hasExtra(CATEGORY)) {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_joke_list;
+    }
 
-			String path = intent.getStringExtra(CATEGORY);
+    @Override
+    protected void initView() {
 
-			mFragment = new NewFragment();
-			Bundle bundle = new Bundle();
-			bundle.putString(NewFragment.URL, URLS.HOST + path);
-			mFragment.setArguments(bundle);
-			mManager.beginTransaction().add(R.id.content, mFragment).commit();
 
-		}
+    }
 
-	}
+    @Override
+    protected void initData() {
+        mManager = getSupportFragmentManager();
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra(CATEGORY)) {
+
+            String path = intent.getStringExtra(CATEGORY);
+
+            mFragment = new HotJokeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(HotJokeFragment.URL, URLS.HOST + path);
+            mFragment.setArguments(bundle);
+            mManager.beginTransaction().add(R.id.content, mFragment).commit();
+
+        }
+    }
 }

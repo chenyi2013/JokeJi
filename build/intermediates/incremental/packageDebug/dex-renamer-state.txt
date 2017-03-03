@@ -1,0 +1,7 @@
+#Fri Mar 03 07:38:29 CST 2017
+base.0=/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_1a9e448a0cc19d6f5d9d74024536d7f7c06ef5b4
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_7bc1099f416ad9c1d07573283439d275ab45367a/classes.dex
+base.1=/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_7bc1099f416ad9c1d07573283439d275ab45367a
+file.0=/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_1a9e448a0cc19d6f5d9d74024536d7f7c06ef5b4/classes.dex

@@ -1,76 +1,121 @@
 package com.kevin.jokeji;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-import com.kevin.jokeji.fragment.NewFragment;
-import com.kevin.jokeji.fragment.TextFragment;
+import com.kevin.jokeji.base.BaseActivity;
+import com.kevin.jokeji.features.image.ImageFragment;
+import com.kevin.jokeji.features.hotjoke.HotJokeFragment;
+import com.kevin.jokeji.features.saying.SayingFragment;
+import com.kevin.jokeji.features.text.TextFragment;
 
-public class MainActivity extends ActionBarActivity implements
-		OnCheckedChangeListener {
+import java.util.ArrayList;
 
-	private RadioGroup mBottomMenu;
-	private Fragment mNewFragment;
-	private Fragment mTextFragment;
+public class MainActivity extends BaseActivity implements
+        OnCheckedChangeListener {
 
-	private FragmentManager mManager;
+    private RadioGroup mBottomMenu;
+    private Fragment mNewFragment;
+    private Fragment mTextFragment;
+    private Fragment mImageFragment;
+    private ViewPager mViewPager;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		mManager = getSupportFragmentManager();
-		initView();
-	}
-
-	private void initView() {
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setLogo(R.drawable.logo);
-        actionBar.setDisplayUseLogoEnabled(true);
+    private ArrayList<Fragment> fragments = new ArrayList<>();
 
 
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#33B5E5"));
-        actionBar.setBackgroundDrawable(colorDrawable);
+    @Override
+    protected void loadData() {
 
 
-		mBottomMenu = (RadioGroup) findViewById(R.id.bottom_menu);
-		mBottomMenu.setOnCheckedChangeListener(this);
+    }
 
-		mNewFragment = new NewFragment();
-		Bundle newBundle = new Bundle();
-		newBundle.putString(NewFragment.URL, "http://www.jokeji.cn/list.htm");
-		mNewFragment.setArguments(newBundle);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
-		mTextFragment = new TextFragment();
-		mManager.beginTransaction().add(R.id.content, mNewFragment).commit();
 
-	}
+    protected void initView() {
 
-	@Override
-	public void onCheckedChanged(RadioGroup group, int checkedId) {
+        mBottomMenu = (RadioGroup) findViewById(R.id.bottom_menu);
+        mBottomMenu.setOnCheckedChangeListener(this);
 
-		switch (checkedId) {
-		case R.id.last_new:
-			mManager.beginTransaction().replace(R.id.content, mNewFragment)
-					.commit();
-			break;
-		case R.id.text:
-			mManager.beginTransaction().replace(R.id.content, mTextFragment)
-					.commit();
-			break;
+        mViewPager = (ViewPager) findViewById(R.id.content);
 
-		default:
-			break;
-		}
 
-	}
+        mNewFragment = new HotJokeFragment();
+        Bundle newBundle = new Bundle();
+        newBundle.putString(HotJokeFragment.URL, "http://www.jokeji.cn/list.htm");
+        mNewFragment.setArguments(newBundle);
+
+        mTextFragment = new TextFragment();
+
+        mImageFragment = new ImageFragment();
+
+        fragments.add(mNewFragment);
+        fragments.add(mTextFragment);
+        fragments.add(mImageFragment);
+        fragments.add(new SayingFragment());
+
+        mViewPager.setAdapter(new JokeJiAdapter(getSupportFragmentManager()));
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                mBottomMenu
+                        .getChildAt(position)
+                        .performClick();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+    }
+
+    class JokeJiAdapter extends FragmentPagerAdapter {
+
+        public JokeJiAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+    }
+
+    @Override
+    protected void initData() {
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        int count = group.getChildCount();
+        for (int i = 0; i < count; i++) {
+            if (checkedId == group.getChildAt(i).getId()) {
+                mViewPager.setCurrentItem(i);
+                break;
+            }
+        }
+    }
+
 }

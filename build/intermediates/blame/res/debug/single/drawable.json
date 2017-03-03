@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_cab_background_top_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_dark.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/vpi__tab_indicator.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/vpi__tab_indicator.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_light.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_dialog_material_background_light.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_cab_background_internal_bg.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_btn_default_mtrl_shape.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_ratingbar_full_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_btn_borderless_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_light.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/bottom_menu_color_list.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/bottom_menu_color_list.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_btn_check_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_btn_check_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/main_tab_me.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/main_tab_me.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/main_tab_emoji.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/main_tab_emoji.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/main_tab_news.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/main_tab_news.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/main_tab_square.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/main_tab_square.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/item_bg.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/item_bg.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/main_tab_tool.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/res/drawable/main_tab_tool.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_dark.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_dialog_material_background_dark.xml"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/drawable/abc_tab_indicator_material.xml"
+    }
+]

@@ -2,19 +2,17 @@ package com.kevin.jokeji;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.widget.TextView;
 
+import com.kevin.jokeji.base.BaseActivity;
 import com.kevin.jokeji.beans.Joke;
 import com.kevin.jokeji.cache.CacheHelper;
 import com.kevin.jokeji.cache.DiskLruCache;
 import com.kevin.jokeji.config.URLS;
 import com.kevin.jokeji.util.Fetcher;
 
-public class JokeDetailActivity extends ActionBarActivity {
+public class JokeDetailActivity extends BaseActivity {
 
     private TextView mJokeDetailTv;
     private Joke mJoke;
@@ -24,27 +22,19 @@ public class JokeDetailActivity extends ActionBarActivity {
     private DiskLruCache mDiskLruCache = null;
     private JokeApplication mApplication;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_joke_detail);
-        mApplication = (JokeApplication) getApplication();
-        mDiskLruCache = mApplication.getDiskLruCache();
-        initView();
-        loadData();
-    }
 
-    private void initView() {
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setLogo(R.drawable.logo);
-        actionBar.setDisplayUseLogoEnabled(true);
+    protected void initView() {
 
         mJokeDetailTv = (TextView) findViewById(R.id.joke_detail);
     }
 
-    private void loadData() {
+    @Override
+    protected void initData() {
+        mApplication = (JokeApplication) getApplication();
+        mDiskLruCache = mApplication.getDiskLruCache();
+    }
+
+    protected void loadData() {
         Intent intent = getIntent();
         if (intent != null) {
 
@@ -63,6 +53,11 @@ public class JokeDetailActivity extends ActionBarActivity {
             }
 
         }
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_joke_detail;
     }
 
     class JokeDetailSyncTask extends AsyncTask<String, Void, String> {

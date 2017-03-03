@@ -1,6 +1,7 @@
 package com.kevin.jokeji.util;
 
 import com.kevin.jokeji.beans.Category;
+import com.kevin.jokeji.beans.Image;
 import com.kevin.jokeji.beans.Joke;
 import com.kevin.jokeji.beans.JokeItem;
 
@@ -10,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -191,6 +193,65 @@ public class Fetcher {
         }
 
         return null;
+
+    }
+
+    public static ArrayList<Image> getImages(String url) {
+
+        ArrayList<Image> jokes = new ArrayList<Image>();
+
+
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(url).timeout(5000).get();
+            Elements contents = doc.getElementsByClass("main-list");
+            String imgUrl = "http://" + new URL(url).getHost();
+
+            Image image = null;
+
+            for (Element element : contents) {
+
+                image = new Image();
+
+                Element dtM = element.getElementsByTag("dt").get(0);
+
+                Element aM = dtM
+                        .getElementsByTag("a")
+                        .get(0);
+
+                image.setIcon(imgUrl + aM
+                        .getElementsByTag("img")
+                        .get(0)
+                        .attr("src"));
+
+
+                image.setAuthor(dtM.getElementsByTag("p")
+                        .get(0)
+                        .getElementsByTag("a")
+                        .get(0)
+                        .text());
+
+                image.setDate(dtM.getElementsByTag("span")
+                        .get(0).text()
+                );
+                image.setTitle(dtM.child(2).text());
+                image.setImage(imgUrl + element
+                        .child(1)
+                        .child(0)
+                        .child(0)
+                        .child(0)
+                        .attr("src"));
+
+
+                jokes.add(image);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return jokes;
 
     }
 }

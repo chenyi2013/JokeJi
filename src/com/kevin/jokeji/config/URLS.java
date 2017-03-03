@@ -2,16 +2,18 @@ package com.kevin.jokeji.config;
 
 public class URLS {
 
-	// Ö÷»úµÄurlµØÖ·
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½urlï¿½ï¿½Ö·
 	public static final String HOST = "http://www.jokeji.cn";
 
-	// Ð¦»°·ÖÀàurl
+	// Ð¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½url
 	public static final String CATEGORY_URL = "http://www.jokeji.cn/Keyword.htm";
 
-	// Ð¦»°ÅÅÐÐurl
+	// Ð¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½url
 	public static final String RANK_URL = "http://www.jokeji.cn/hot.asp?action=brow";
 
-	// Ð¦»°·çÔÆ°ñurl
+	// Ð¦ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½url
 	public static final String AWARDS_URL = "http://www.jokeji.cn/joke_top.htm";
+
+	public static final String IMAGES_URL = "http://www.caoliu1.com/pic";
 
 }

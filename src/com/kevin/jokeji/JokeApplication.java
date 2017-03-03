@@ -1,40 +1,43 @@
 package com.kevin.jokeji;
 
-import java.io.File;
-import java.io.IOException;
-
 import android.app.Application;
 
 import com.kevin.jokeji.cache.CacheHelper;
 import com.kevin.jokeji.cache.DiskLruCache;
 import com.kevin.jokeji.config.Config;
 
+import java.io.File;
+import java.io.IOException;
+
 public class JokeApplication extends Application {
 
-	private DiskLruCache mDiskLruCache;
+    private static DiskLruCache mDiskLruCache;
+    private static JokeApplication application;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-	}
 
-	public synchronized DiskLruCache getDiskLruCache() {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        application = this;
+    }
 
-		try {
+    public static synchronized DiskLruCache getDiskLruCache() {
 
-			File cacheDir = CacheHelper.getDiskCacheDir(this, Config.CACHE_DIR);
-			if (!cacheDir.exists()) {
-				cacheDir.mkdirs();
-			}
+        try {
 
-			mDiskLruCache = DiskLruCache.open(cacheDir,
-					CacheHelper.getAppVersion(this), 1, Config.CACHE_SIZE);
+            File cacheDir = CacheHelper.getDiskCacheDir(application, Config.CACHE_DIR);
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs();
+            }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+            mDiskLruCache = DiskLruCache.open(cacheDir,
+                    CacheHelper.getAppVersion(application), 1, Config.CACHE_SIZE);
 
-		return mDiskLruCache;
-	}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return mDiskLruCache;
+    }
 
 }

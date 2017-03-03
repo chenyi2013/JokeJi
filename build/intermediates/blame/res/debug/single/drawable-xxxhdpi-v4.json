@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/sky.png",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.yalantis/phoenix/1.2.3/res/drawable-xxxhdpi-v4/sky.png"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/buildings.png",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.yalantis/phoenix/1.2.3/res/drawable-xxxhdpi-v4/buildings.png"
+    },
+    {
+        "merged": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4/sun.png",
+        "source": "/Users/kevin/Desktop/Joke/JokeJi/build/intermediates/exploded-aar/com.yalantis/phoenix/1.2.3/res/drawable-xxxhdpi-v4/sun.png"
+    }
+]
