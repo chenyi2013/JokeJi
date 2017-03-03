@@ -17,12 +17,14 @@ import com.kevin.jokeji.base.BaseFragment;
 import com.kevin.jokeji.beans.Joke;
 import com.kevin.jokeji.features.base.BaseView;
 import com.kevin.jokeji.features.base.CommonPresenter;
-import com.yalantis.phoenix.PullToRefreshView;
 
 import java.util.ArrayList;
 
+import cn.bingoogolapple.refreshlayout.BGAMeiTuanRefreshViewHolder;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
+
 public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<Joke>>
-        , OnItemClickListener {
+        , OnItemClickListener, BGARefreshLayout.BGARefreshLayoutDelegate {
 
     public static final String URL = "url";
 
@@ -30,7 +32,7 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
     private JokeAdapter mAdapter;
 
-    PullToRefreshView mRefreshLayout;
+    BGARefreshLayout mRefreshLayout;
     private CommonPresenter<ArrayList<Joke>> mPresenter;
 
 
@@ -45,21 +47,29 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
         mAdapter = new JokeAdapter();
 
         mJokeListView = (ListView) getView().findViewById(R.id.joke_list_view);
-        View footer = getActivity().getLayoutInflater().inflate(
-                R.layout.more_item, mJokeListView, false);
-        mJokeListView.addFooterView(footer);
+//        View footer = getActivity().getLayoutInflater().inflate(
+//                R.layout.more_item, mJokeListView, false);
+//        mJokeListView.addFooterView(footer);
         mJokeListView.setOnItemClickListener(this);
         mJokeListView.setAdapter(mAdapter);
 
-        mRefreshLayout = (PullToRefreshView) getView()
+        mRefreshLayout = (BGARefreshLayout) getView()
                 .findViewById(R.id.pull_to_refresh);
 
-        mRefreshLayout.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mRefreshLayout.setRefreshing(true);
-            }
-        });
+
+        BGAMeiTuanRefreshViewHolder meiTuanRefreshViewHolder = new BGAMeiTuanRefreshViewHolder(getActivity(), true);
+        meiTuanRefreshViewHolder.setPullDownImageResource(R.drawable.logo);
+        meiTuanRefreshViewHolder.setChangeToReleaseRefreshAnimResId(R.drawable.bga_refresh_mt_refreshing);
+        meiTuanRefreshViewHolder.setRefreshingAnimResId(R.drawable.bga_refresh_mt_refreshing);
+
+        mRefreshLayout.setRefreshViewHolder(meiTuanRefreshViewHolder);
+
+    }
+
+    @Override
+    protected void setListener() {
+        super.setListener();
+        mRefreshLayout.setDelegate(this);
     }
 
     @Override
@@ -76,7 +86,6 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
         Bundle bundle = getArguments();
         if (bundle != null) {
             String url = bundle.getString(URL);
-            mRefreshLayout.setRefreshing(true);
             mPresenter.loadData(url);
         }
 
@@ -109,7 +118,8 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
     @Override
     public void showData(ArrayList<Joke> jokes) {
-        mRefreshLayout.setRefreshing(false);
+        mRefreshLayout.endLoadingMore();
+        mRefreshLayout.endRefreshing();
         if (jokes != null) {
             mAdapter.bindData(jokes);
             mAdapter.notifyDataSetChanged();
@@ -119,6 +129,17 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     @Override
     public void showError() {
 
+    }
+
+    @Override
+    public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
+        loadData();
+    }
+
+    @Override
+    public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+        loadData();
+        return true;
     }
 
     private class ViewHolder {
@@ -135,7 +156,7 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
         public void bindData(ArrayList<Joke> jokes) {
 
             if (jokes != null) {
-                this.jokes = jokes;
+                this.jokes.addAll(jokes);
             }
 
         }

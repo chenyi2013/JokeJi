@@ -30,17 +30,17 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
     final public void loadData(String url) {
         try {
 
-            T data = (T) CacheHelper.getObjectToDisk(JokeApplication.getDiskLruCache(), url);
-
-            if (data != null) {
-                if (data instanceof ArrayList) {
-                    ArrayList list = (ArrayList) data;
-                    if (list.size() > 0) {
-                        commonPresenter.onGetData(data);
-                        return;
-                    }
-                }
-            }
+//            T data = (T) CacheHelper.getObjectToDisk(JokeApplication.getDiskLruCache(), url);
+//
+//            if (data != null) {
+//                if (data instanceof ArrayList) {
+//                    ArrayList list = (ArrayList) data;
+//                    if (list.size() > 0) {
+//                        commonPresenter.onGetData(data);
+//                        return;
+//                    }
+//                }
+//            }
 
 
             Observable

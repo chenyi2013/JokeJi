@@ -119,13 +119,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#ffe000"));
+            window.setStatusBarColor(Color.parseColor("#5b918e"));
             isImmersive = true;
         }
 
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
         mTitleBar.setImmersive(isImmersive);
-        mTitleBar.setBackgroundColor(Color.parseColor("#ffe000"));
+        mTitleBar.setBackgroundColor(Color.parseColor("#5b918e"));
         mTitleBar.setLeftTextColor(Color.WHITE);
         mTitleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
