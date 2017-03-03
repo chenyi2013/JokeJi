@@ -1,2 +1,16 @@
 /bin
 /gen
+gradle
+.idea/
+.gradle
+local.properties
+build
+/*/out
+/*/*/build
+/*/*/production
+*.iml
+*.iws
+*.ipr
+*~
+*.swp
+*.DS_Store
