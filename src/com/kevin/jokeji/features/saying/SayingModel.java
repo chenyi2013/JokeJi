@@ -50,7 +50,7 @@ public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
                 sayings.add(saying);
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

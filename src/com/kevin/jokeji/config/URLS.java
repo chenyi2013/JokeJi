@@ -12,6 +12,6 @@ public class URLS {
 
     public static final String IMAGES_URL = "http://www.caoliu1.com";
 
-    public static final String SAYING = "https://www.susu19.com/htm/piclist6/";
+    public static final String SAYING = "https://www.susu19.com/htm/piclist";
 
 }

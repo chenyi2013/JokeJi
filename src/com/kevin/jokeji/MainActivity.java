@@ -11,6 +11,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.kevin.jokeji.base.BaseActivity;
 import com.kevin.jokeji.features.image.ImageFragment;
 import com.kevin.jokeji.features.hotjoke.HotJokeFragment;
+import com.kevin.jokeji.features.saying.SayingContainerFragment;
 import com.kevin.jokeji.features.saying.SayingFragment;
 import com.kevin.jokeji.features.text.TextFragment;
 
@@ -60,7 +61,7 @@ public class MainActivity extends BaseActivity implements
         fragments.add(mNewFragment);
         fragments.add(mTextFragment);
         fragments.add(mImageFragment);
-        fragments.add(new SayingFragment());
+        fragments.add(new SayingContainerFragment());
 
         mViewPager.setAdapter(new JokeJiAdapter(getSupportFragmentManager()));
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

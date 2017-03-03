@@ -2,6 +2,8 @@ package com.kevin.jokeji.features.saying;
 
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -11,7 +13,6 @@ import com.kevin.jokeji.base.BaseFragment;
 import com.kevin.jokeji.base.listview.CommonAdapter;
 import com.kevin.jokeji.base.listview.ViewHolder;
 import com.kevin.jokeji.beans.Saying;
-import com.kevin.jokeji.config.URLS;
 import com.kevin.jokeji.features.base.BaseView;
 import com.kevin.jokeji.features.base.CommonPresenter;
 
@@ -22,6 +23,9 @@ import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
 public class SayingFragment extends BaseFragment implements BaseView<ArrayList<Saying>>, BGARefreshLayout.BGARefreshLayoutDelegate {
 
+    private static final String URL = "url";
+    private String url;
+
     private CommonPresenter<ArrayList<Saying>> presenter;
     private ListView mListView;
     private BGARefreshLayout mRefreshLayout;
@@ -31,6 +35,13 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
     public SayingFragment() {
     }
 
+    public static Fragment create(String url) {
+        Fragment fragment = new SayingFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(URL, url);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     protected void initView() {
@@ -56,13 +67,14 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
 
     @Override
     protected void initData() {
+        url = (String) getArguments().get(URL);
         presenter = new CommonPresenter<>(new SayingModel(), this);
     }
 
     @Override
     protected void loadData() {
 
-        presenter.loadData(URLS.SAYING, true);
+        presenter.loadData(url, true);
 
     }
 
@@ -112,7 +124,7 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        presenter.loadData(URLS.SAYING, false);
+        presenter.loadData(url, false);
         return true;
     }
 }
