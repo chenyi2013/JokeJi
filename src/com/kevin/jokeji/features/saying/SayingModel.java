@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
 
     @Override
     public String formatUrlForPageId(String url, int page) {
-        return url + page + ".htm";
+        return url + "_" + page + ".html";
     }
 
     @Override
@@ -35,18 +34,21 @@ public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
 
         try {
             Document doc = Jsoup.connect(url).timeout(15000).get();
-            Elements contents = doc.getElementsByClass("channel");
+            Elements contents = doc.getElementsByClass("art-t");
 
-            Elements elements = contents
-                    .get(0)
-                    .child(0)
-                    .getElementsByTag("a");
 
-            for (Element element : elements) {
+            for (Element element : contents) {
 
                 saying = new Saying();
-                saying.setTitle(element.ownText());
-                saying.setUrl("http://" + new URL(url).getHost() + element.attr("href"));
+                saying.setTitle(element.child(0).text());
+                saying.setUrl("http://" + new URL(url).getHost()
+                        + element
+                        .child(0)
+                        .child(0)
+                        .attr("href"));
+                saying.setContent(element
+                        .child(1)
+                        .text());
                 sayings.add(saying);
             }
 

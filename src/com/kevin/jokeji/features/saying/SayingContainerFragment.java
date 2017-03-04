@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class SayingContainerFragment extends BaseFragment {
 
-    private String mTitles[] = {"自拍", "亚洲", "欧洲", "美腿", "清纯", "熟女", "卡通"};
+    private String mTitles[] = {"名言", "诗句", "台词", "日志", "段子"};
     ViewPager mPager;
     SlidingTabLayout mTabLayout;
     ArrayList<Fragment> fragments;
@@ -37,19 +37,16 @@ public class SayingContainerFragment extends BaseFragment {
         mPager = findViewById(R.id.view_pager);
         mTabLayout = findViewById(R.id.sliding_tab_layout);
         mPager.setAdapter(new SayingContainerAdapter(getChildFragmentManager()));
-        mTabLayout.setViewPager(mPager,mTitles);
+        mTabLayout.setViewPager(mPager, mTitles);
     }
 
     @Override
     protected void initData() {
 
         fragments = new ArrayList<>();
-        for (int i = 1; i <= 8; i++) {
-            if (i != 5) {
-                fragments.add(SayingFragment.create(URLS.SAYING + i + "/"));
-            }
+        for (int i = 0; i < 5; i++) {
+            fragments.add(SayingFragment.create(URLS.SAYINGS[i]));
         }
-
     }
 
     @Override

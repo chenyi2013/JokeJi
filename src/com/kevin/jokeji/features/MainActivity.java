@@ -1,4 +1,4 @@
-package com.kevin.jokeji;
+package com.kevin.jokeji.features;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.kevin.jokeji.R;
 import com.kevin.jokeji.base.BaseActivity;
-import com.kevin.jokeji.features.image.ImageFragment;
+import com.kevin.jokeji.config.URLS;
 import com.kevin.jokeji.features.hotjoke.HotJokeFragment;
+import com.kevin.jokeji.features.image.ImageFragment;
 import com.kevin.jokeji.features.saying.SayingContainerFragment;
-import com.kevin.jokeji.features.saying.SayingFragment;
 import com.kevin.jokeji.features.text.TextFragment;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class MainActivity extends BaseActivity implements
 
         mNewFragment = new HotJokeFragment();
         Bundle newBundle = new Bundle();
-        newBundle.putString(HotJokeFragment.URL, "http://www.jokeji.cn/list.htm");
+        newBundle.putString(HotJokeFragment.URL, URLS.HOT_JOKE);
         mNewFragment.setArguments(newBundle);
 
         mTextFragment = new TextFragment();
@@ -113,7 +114,7 @@ public class MainActivity extends BaseActivity implements
         int count = group.getChildCount();
         for (int i = 0; i < count; i++) {
             if (checkedId == group.getChildAt(i).getId()) {
-                mViewPager.setCurrentItem(i);
+                mViewPager.setCurrentItem(i, false);
                 break;
             }
         }

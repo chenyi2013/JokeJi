@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -52,8 +51,8 @@ public class HotJokeModel extends HtmlCommonModel<ArrayList<Joke>> {
                 joke.setData(li.child(2).text());
                 jokes.add(joke);
             }
-        } catch (IOException e) {
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return jokes;

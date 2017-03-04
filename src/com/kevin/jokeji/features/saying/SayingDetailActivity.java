@@ -1,9 +1,11 @@
 package com.kevin.jokeji.features.saying;
 
 import android.graphics.Bitmap;
+import android.text.Html;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -20,11 +22,11 @@ import com.kevin.jokeji.util.ScreenUtil;
 
 import java.util.ArrayList;
 
-public class SayingDetailActivity extends BaseActivity implements BaseView<ArrayList<String>> {
+public class SayingDetailActivity extends BaseActivity implements BaseView<String> {
 
     public static final String URL = "url";
-    private CommonPresenter<ArrayList<String>> presenter;
-    private ListView listView;
+    private CommonPresenter<String> presenter;
+    private TextView content;
 
 
     @Override
@@ -32,6 +34,7 @@ public class SayingDetailActivity extends BaseActivity implements BaseView<Array
 
         String url = getIntent().getStringExtra(URL);
         if (url != null) {
+            showLoading();
             presenter.loadData(url,true);
         }
 
@@ -45,7 +48,7 @@ public class SayingDetailActivity extends BaseActivity implements BaseView<Array
 
     @Override
     protected void initView() {
-        listView = (ListView) findViewById(R.id.activity_saying_detail);
+        content = (TextView) findViewById(R.id.content);
     }
 
     @Override
@@ -54,39 +57,10 @@ public class SayingDetailActivity extends BaseActivity implements BaseView<Array
     }
 
     @Override
-    public void showData(final ArrayList<String> strings,boolean isRefresh) {
+    public void showData(final String strings,boolean isRefresh) {
 
-        listView.setAdapter(new CommonAdapter<String>(this, R.layout.saying_detail_item, strings) {
-            @Override
-            protected void convert(ViewHolder viewHolder, final String item, int position) {
-
-                final ImageView imageView = viewHolder.getView(R.id.image);
-                Glide.with(SayingDetailActivity.this)
-                        .load(item)
-                        .asBitmap()
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                        .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-
-                            @Override
-                            public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
-
-
-                                int imageWidth = bitmap.getWidth();
-                                int imageHeight = bitmap.getHeight();
-                                int height = ScreenUtil.getScreenWidth(SayingDetailActivity.this) * imageHeight / imageWidth;
-                                ViewGroup.LayoutParams para = imageView.getLayoutParams();
-                                para.height = height;
-                                imageView.setLayoutParams(para);
-                                Glide.with(SayingDetailActivity.this)
-                                        .load(item)
-                                        .asBitmap()
-                                        .into(imageView);
-
-                            }
-
-                        });
-            }
-        });
+        showContent();
+        content.setText(Html.fromHtml(strings));
     }
 
     @Override

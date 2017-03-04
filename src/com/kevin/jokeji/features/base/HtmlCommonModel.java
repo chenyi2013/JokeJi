@@ -1,7 +1,9 @@
 package com.kevin.jokeji.features.base;
 
-import com.kevin.jokeji.JokeApplication;
+import com.kevin.jokeji.app.JokeApplication;
 import com.kevin.jokeji.cache.CacheHelper;
+
+import java.util.ArrayList;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,8 +28,12 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
     public abstract T getData(String url);
 
 
-    public String formatUrlForPageId(String url, int page) {
+    protected String formatUrlForPageId(String url, int page) {
         return url;
+    }
+
+    protected boolean isUseCache() {
+        return false;
     }
 
 
@@ -38,17 +44,19 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
                 page = 1;
             }
 
-//            T data = (T) CacheHelper.getObjectToDisk(JokeApplication.getDiskLruCache(), url);
-//
-//            if (data != null) {
-//                if (data instanceof ArrayList) {
-//                    ArrayList list = (ArrayList) data;
-//                    if (list.size() > 0) {
-//                        commonPresenter.onGetData(data);
-//                        return;
-//                    }
-//                }
-//            }
+            if (isUseCache()) {
+                T data = (T) CacheHelper.getObjectToDisk(JokeApplication.getDiskLruCache(), url);
+
+                if (data != null) {
+                    if (data instanceof ArrayList) {
+                        ArrayList list = (ArrayList) data;
+                        if (list.size() > 0) {
+                            commonPresenter.onGetData(data, isRefresh);
+                            return;
+                        }
+                    }
+                }
+            }
 
 
             Observable

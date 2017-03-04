@@ -1,5 +1,7 @@
 package com.kevin.jokeji.features.base;
 
+import android.support.v4.app.FragmentActivity;
+
 /**
  * Created by kevin on 17/3/2.
  */
@@ -14,6 +16,8 @@ public class CommonPresenter<T> implements BasePresenter<T> {
         this.baseView = baseView;
         baseModel.setPresenter(this);
     }
+
+
 
 
     @Override

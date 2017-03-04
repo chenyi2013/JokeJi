@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <com.kevin.jokeji.view.PinnedSectionListView
-        android:id="@android:id/list"
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:overScrollMode="never"
         android:layout_height="match_parent" >

@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.kevin.jokeji.JokeDetailActivity;
 import com.kevin.jokeji.R;
 import com.kevin.jokeji.base.BaseFragment;
 import com.kevin.jokeji.beans.Joke;
@@ -81,6 +80,8 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     }
 
     protected void loadData() {
+
+        showLoading();
         Bundle bundle = getArguments();
         if (bundle != null) {
             url = bundle.getString(URL);
@@ -93,18 +94,10 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
 
-        if (mAdapter.getCount() == 0) {
-            return;
-        }
+        Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
+        intent.putExtra(JokeDetailActivity.JOKE, (Joke) mAdapter.getItem(position));
+        startActivity(intent);
 
-        if (position < mAdapter.getCount() - 1 + mJokeListView.getFooterViewsCount()) {
-            Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
-            intent.putExtra(JokeDetailActivity.JOKE, (Joke) mAdapter.getItem(position));
-            startActivity(intent);
-        } else if (position == mAdapter.getCount() - 1
-                + mJokeListView.getFooterViewsCount()) {
-
-        }
 
     }
 
@@ -116,6 +109,8 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
     @Override
     public void showData(ArrayList<Joke> jokes, boolean isRefresh) {
+
+        showContent();
 
         mRefreshLayout.endLoadingMore();
         mRefreshLayout.endRefreshing();
@@ -138,7 +133,9 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        loadData();
+        if (url != null) {
+            mPresenter.loadData(url, true);
+        }
     }
 
     @Override

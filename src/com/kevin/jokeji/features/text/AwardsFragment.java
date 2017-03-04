@@ -1,80 +1,76 @@
 package com.kevin.jokeji.features.text;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kevin.jokeji.JokeApplication;
-import com.kevin.jokeji.JokeDetailActivity;
-import com.kevin.jokeji.JokeListActivity;
 import com.kevin.jokeji.R;
+import com.kevin.jokeji.base.BaseFragment;
 import com.kevin.jokeji.beans.JokeItem;
-import com.kevin.jokeji.cache.CacheHelper;
-import com.kevin.jokeji.cache.DiskLruCache;
 import com.kevin.jokeji.config.URLS;
-import com.kevin.jokeji.util.Fetcher;
+import com.kevin.jokeji.features.base.BaseView;
+import com.kevin.jokeji.features.base.CommonPresenter;
+import com.kevin.jokeji.features.hotjoke.JokeDetailActivity;
 import com.kevin.jokeji.view.PinnedSectionListView.PinnedSectionListAdapter;
 
 import java.util.ArrayList;
 
-public class AwardsFragment extends ListFragment implements OnClickListener {
+public class AwardsFragment extends BaseFragment implements BaseView<ArrayList<JokeItem>>
+        , OnClickListener, AdapterView.OnItemClickListener {
+
+    private ListView mAwardsLv;
 
     private JokeAdapter mJokeAdapter;
-    private ArrayList<JokeItem> mJokeItems;
 
-    private DiskLruCache mDiskLruCache = null;
-    private JokeApplication mApplication;
+    CommonPresenter<ArrayList<JokeItem>> mPresenter;
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mApplication = (JokeApplication) getActivity().getApplication();
-        mDiskLruCache = mApplication.getDiskLruCache();
+    protected void initView() {
+        mJokeAdapter = new JokeAdapter(getActivity());
+        mAwardsLv = findViewById(R.id.list_view);
+        mAwardsLv.setAdapter(mJokeAdapter);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frg_award_layout, container, false);
+    protected void initData() {
+        mPresenter = new CommonPresenter<>(new AwardsModel(), this);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initializeAdapter();
-
-        mJokeItems = CacheHelper
-                .getObjectToDisk(mDiskLruCache, URLS.AWARDS_URL);
-        if (mJokeItems != null) {
-            mJokeAdapter.bindData(mJokeItems);
-            mJokeAdapter.notifyDataSetChanged();
-        } else {
-            new JokeAnsycTask().execute(URLS.AWARDS_URL);
-        }
-
+    protected void loadData() {
+        showLoading();
+        mPresenter.loadData(URLS.AWARDS_URL, true);
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    protected int getLayoutId() {
+        return R.layout.frg_award_layout;
+    }
 
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(getActivity(), "Item: " + v.getTag(), Toast.LENGTH_SHORT)
+                .show();
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        JokeItem item = (JokeItem) getListView().getAdapter().getItem(position);
+    protected void setListener() {
+        mAwardsLv.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        JokeItem item = (JokeItem) mAwardsLv.getAdapter().getItem(position);
 
         if (item.type == JokeItem.ITEM) {
             Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
@@ -85,40 +81,20 @@ public class AwardsFragment extends ListFragment implements OnClickListener {
             intent.putExtra(JokeListActivity.CATEGORY, "/" + item.getUrl());
             startActivity(intent);
         }
-
-    }
-
-    private void initializeAdapter() {
-
-        mJokeAdapter = new JokeAdapter(getActivity());
-        setListAdapter(mJokeAdapter);
     }
 
     @Override
-    public void onClick(View v) {
-        Toast.makeText(getActivity(), "Item: " + v.getTag(), Toast.LENGTH_SHORT)
-                .show();
+    public void showData(ArrayList<JokeItem> jokeItems, boolean isRefresh) {
+        showContent();
+        mJokeAdapter.bindData(jokeItems);
+        mJokeAdapter.notifyDataSetChanged();
     }
 
-    class JokeAnsycTask extends AsyncTask<String, Void, ArrayList<JokeItem>> {
-
-        @Override
-        protected ArrayList<JokeItem> doInBackground(String... params) {
-
-            ArrayList<JokeItem> jokeItems = Fetcher.getAwards(params[0]);
-            CacheHelper.saveObjectToDisk(mDiskLruCache, params[0], jokeItems);
-            return jokeItems;
-        }
-
-        @SuppressLint("NewApi")
-        @Override
-        protected void onPostExecute(ArrayList<JokeItem> result) {
-            mJokeItems = result;
-            mJokeAdapter.bindData(mJokeItems);
-            mJokeAdapter.notifyDataSetChanged();
-        }
+    @Override
+    public void showError() {
 
     }
+
 
     static class JokeAdapter extends BaseAdapter implements
             PinnedSectionListAdapter {

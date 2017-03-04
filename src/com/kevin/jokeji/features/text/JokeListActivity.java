@@ -1,9 +1,10 @@
-package com.kevin.jokeji;
+package com.kevin.jokeji.features.text;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import com.kevin.jokeji.R;
 import com.kevin.jokeji.base.BaseActivity;
 import com.kevin.jokeji.config.URLS;
 import com.kevin.jokeji.features.hotjoke.HotJokeFragment;

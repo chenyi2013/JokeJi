@@ -59,6 +59,7 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
             @Override
             protected void convert(ViewHolder viewHolder, Saying item, int position) {
                 viewHolder.setText(R.id.saying, item.getTitle());
+                viewHolder.setText(R.id.saying_content, item.getContent());
             }
         };
 
@@ -74,6 +75,7 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
     @Override
     protected void loadData() {
 
+        showLoading();
         presenter.loadData(url, true);
 
     }
@@ -101,6 +103,9 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
 
     @Override
     public void showData(ArrayList<Saying> sayings, boolean isRefresh) {
+
+        showContent();
+
         mRefreshLayout.endRefreshing();
         mRefreshLayout.endLoadingMore();
         if (isRefresh) {
@@ -119,7 +124,7 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        loadData();
+        presenter.loadData(url, true);
     }
 
     @Override

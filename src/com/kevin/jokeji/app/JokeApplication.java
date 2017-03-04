@@ -1,4 +1,4 @@
-package com.kevin.jokeji;
+package com.kevin.jokeji.app;
 
 import android.app.Application;
 

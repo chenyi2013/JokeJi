@@ -54,6 +54,7 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
 
     @Override
     protected void loadData() {
+        showLoading();
         mPresenter.loadData(URLS.IMAGES_URL, true);
     }
 
@@ -65,6 +66,9 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
 
     @Override
     public void showData(ArrayList<Image> images, boolean isRefresh) {
+
+        showContent();
+
         mRefreshLayout.endRefreshing();
         mRefreshLayout.endLoadingMore();
         if (isRefresh) {
@@ -84,7 +88,7 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
 
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        loadData();
+        mPresenter.loadData(URLS.IMAGES_URL, true);
     }
 
     @Override
