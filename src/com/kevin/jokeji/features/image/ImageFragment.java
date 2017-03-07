@@ -2,7 +2,6 @@ package com.kevin.jokeji.features.image;
 
 
 import android.widget.AbsListView;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.kevin.jokeji.R;
@@ -24,6 +23,7 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
     private CommonPresenter<ArrayList<Image>> mPresenter;
     private ImageAdapter imageCommonAdapter;
     private BGARefreshLayout mRefreshLayout;
+    private ImageUtils mImageUtils;
 
 
     public ImageFragment() {
@@ -51,6 +51,7 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
     @Override
     protected void initData() {
         mPresenter = new CommonPresenter<>(new ImageModel(), this);
+        mImageUtils = new ImageUtils(getActivity());
     }
 
     @Override
@@ -103,21 +104,7 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
         switch (scrollState) {
             case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
                 imageCommonAdapter.setScrollStatue(false);
-
-                int count = view.getChildCount();
-                for (int i = 0; i < count; i++) {
-
-                    final Image item = (Image) view.getChildAt(i).getTag(R.id.imageloader_uri);
-
-                    if (item.isImage()) {
-
-                        final ImageView imageView = (ImageView) view.getChildAt(i).findViewById(R.id.img);
-                        ImageView icon = (ImageView) view.getChildAt(i).findViewById(R.id.icon);
-                        ImageUtils.loadImages(getActivity(), item, imageView, icon);
-
-                    }
-                }
-
+                mImageUtils.loadImageJokes(view);
                 break;
             case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
                 imageCommonAdapter.setScrollStatue(true);

@@ -12,13 +12,12 @@ import java.util.List;
 
 public class ImageAdapter extends MultiItemTypeAdapter {
 
-    private boolean isScrollStatue;
     private ImageItem imageItem;
     private TextItem textItem;
 
     public void setScrollStatue(boolean isScrollStatue) {
-        this.isScrollStatue = isScrollStatue;
         imageItem.setScrollState(isScrollStatue);
+        textItem.setScrollState(isScrollStatue);
     }
 
     public ImageAdapter(Context context, List datas) {

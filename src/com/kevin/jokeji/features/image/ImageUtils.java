@@ -1,10 +1,10 @@
 package com.kevin.jokeji.features.image;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -23,7 +23,13 @@ import com.kevin.jokeji.view.GlideRoundTransform;
 
 public class ImageUtils {
 
-    private static void loadOriginRatioImage(final Activity activity, final Image item, final ImageView imageView) {
+    private Activity activity;
+
+    ImageUtils(Activity activity) {
+        this.activity = activity;
+    }
+
+    private void loadOriginRatioImage(final Image item, final ImageView imageView) {
         Glide.with(activity)
                 .load(item.getImage())
                 .asBitmap()
@@ -65,44 +71,76 @@ public class ImageUtils {
     }
 
 
-    public static void loadImages(Context context, Image item, ImageView imageView
+    public void loadImages(Image item, ImageView imageView
             , ImageView iconView) {
+        loadIcon(item, iconView);
+        loadImg(item, imageView);
+    }
+
+    public void loadImg(Image item, ImageView imageView) {
         String imgTag = (String) imageView.getTag(R.id.imageloader_uri);
-        String iconTag = (String) iconView.getTag(R.id.imageloader_uri);
-
-        if (!"1".equals(iconTag)) {
-            //设置为已加载过数据
-            iconView.setTag(R.id.imageloader_uri, "1");
-            Glide.with(context)
-                    .load(item.getIcon())
-                    .asBitmap()
-                    .placeholder(R.drawable.ic_default)
-                    .transform(new GlideRoundTransform(context))
-                    .error(R.drawable.ic_default)
-                    .into(iconView);
-        }
-
         if (!"1".equals(imgTag)) {
             //设置为已加载过数据
             imageView.setTag(R.id.imageloader_uri, "1");
-            loadOriginRatioImage((Activity) context, item, imageView);
+            loadOriginRatioImage(item, imageView);
         }
     }
 
+    public void loadIcon(Image item, ImageView iconView) {
+        String iconTag = (String) iconView.getTag(R.id.imageloader_uri);
+        if (!"1".equals(iconTag)) {
+            //设置为已加载过数据
+            iconView.setTag(R.id.imageloader_uri, "1");
+            Glide.with(activity)
+                    .load(item.getIcon())
+                    .asBitmap()
+                    .placeholder(R.drawable.ic_default)
+                    .transform(new GlideRoundTransform(activity))
+                    .error(R.drawable.ic_default)
+                    .into(iconView);
+        }
+    }
 
-    public static void loadDefaultImages(Context context,Image item, ImageView imageView, ImageView iconView) {
+    public void loadDefaultImages(Image item, ImageView imageView, ImageView iconView) {
+        loadDefaultImg(item, imageView);
+        loadDefaultIcon(item, iconView);
+    }
+
+    public void loadDefaultImg(Image item, ImageView imageView) {
         imageView.setTag(R.id.imageloader_uri, item.getImage());
-        iconView.setTag(R.id.imageloader_uri, item.getIcon());
-        Glide.with(context)
+        Glide.with(activity)
                 .load(R.drawable.ic_default)
                 .crossFade()
                 .into(imageView);
-        Glide.with(context)
+    }
+
+    public void loadDefaultIcon(Image item, ImageView iconView) {
+        iconView.setTag(R.id.imageloader_uri, item.getIcon());
+        Glide.with(activity)
                 .load(R.drawable.ic_default)
                 .placeholder(R.drawable.ic_default)
-                .transform(new GlideRoundTransform(context))
+                .transform(new GlideRoundTransform(activity))
                 .crossFade()
                 .into(iconView);
+    }
+
+
+    public void loadImageJokes(AbsListView view) {
+
+        int count = view.getChildCount();
+        for (int i = 0; i < count; i++) {
+
+            final Image item = (Image) view.getChildAt(i).getTag(R.id.imageloader_uri);
+
+            ImageView icon = (ImageView) view.getChildAt(i).findViewById(R.id.icon);
+
+            if (item.isImage()) {
+                final ImageView imageView = (ImageView) view.getChildAt(i).findViewById(R.id.img);
+                loadImages(item, imageView, icon);
+            } else {
+                loadIcon(item, icon);
+            }
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.kevin.jokeji.features.image;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -13,11 +14,11 @@ import com.kevin.jokeji.beans.Image;
  */
 
 public class ImageItem implements ItemViewDelegate<Image> {
-    private Context context;
     private boolean isScrollState;
+    private ImageUtils imageUtils;
 
     ImageItem(Context context) {
-        this.context = context;
+        imageUtils = new ImageUtils((Activity) context);
     }
 
     public void setScrollState(boolean isScrollState) {
@@ -47,9 +48,9 @@ public class ImageItem implements ItemViewDelegate<Image> {
         final ImageView iconView = viewHolder.getView(R.id.icon);
 
         if (!isScrollState) {
-            ImageUtils.loadImages(context, item, imageView, iconView);
+            imageUtils.loadImages(item, imageView, iconView);
         } else {
-            ImageUtils.loadDefaultImages(context, item, imageView, iconView);
+            imageUtils.loadDefaultImages(item, imageView, iconView);
         }
 
 
