@@ -13,6 +13,42 @@ public class Image implements Serializable{
     private String date;
     private String title;
     private String image;
+    private boolean isImage;
+    private String content;
+    private String gifImg;
+    private boolean isGif;
+
+    public String getGifImg() {
+        return gifImg;
+    }
+
+    public void setGifImg(String gifImg) {
+        this.gifImg = gifImg;
+    }
+
+    public boolean isGif() {
+        return isGif;
+    }
+
+    public void setGif(boolean gif) {
+        isGif = gif;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isImage() {
+        return isImage;
+    }
+
+    public void setImage(boolean image) {
+        isImage = image;
+    }
 
     public String getIcon() {
         return icon;

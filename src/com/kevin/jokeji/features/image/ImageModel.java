@@ -1,7 +1,5 @@
 package com.kevin.jokeji.features.image;
 
-import android.util.Log;
-
 import com.kevin.jokeji.beans.Image;
 import com.kevin.jokeji.features.base.HtmlCommonModel;
 
@@ -11,7 +9,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +20,7 @@ public class ImageModel extends HtmlCommonModel<ArrayList<Image>> {
     @Override
     public String formatUrlForPageId(String url, int page) {
 
-        return url + "/index_" + page + ".html";
+        return url + "/index_" + page + ".htm";
     }
 
     @Override
@@ -32,48 +29,49 @@ public class ImageModel extends HtmlCommonModel<ArrayList<Image>> {
 
         try {
             Document doc = Jsoup.connect(url).timeout(5000).get();
-            Elements contents = doc.getElementsByClass("main-list");
-            String imgUrl = "http://" + new URL(url).getHost();
+            Elements contents = doc.getElementsByClass("mahua");
 
             Image image = null;
             for (Element element : contents) {
 
                 image = new Image();
-
-                Element dtM = element.getElementsByTag("dt").get(0);
-
-                Element aM = dtM
-                        .getElementsByTag("a")
-                        .get(0);
-
-                image.setIcon(imgUrl + aM
-                        .getElementsByTag("img")
-                        .get(0)
-                        .attr("src"));
-
-
-                image.setAuthor(dtM.getElementsByTag("p")
-                        .get(0)
-                        .getElementsByTag("a")
-                        .get(0)
-                        .text());
-
-                image.setDate(dtM.getElementsByTag("span")
-                        .get(0).text()
-                );
-                image.setTitle(dtM.child(2).text());
-                image.setImage(imgUrl + element
-                        .child(1)
-                        .child(0)
-                        .child(0)
-                        .child(0)
-                        .attr("src"));
-
-
                 images.add(image);
 
+
+                Element iconEl = element.child(0).child(0).child(0);
+                Element imgEl = element.child(1).child(0);
+                image.setTitle(element.child(0).child(2).child(0).text());
+                image.setAuthor(element.child(0).child(1).child(0).text());
+
+                if (iconEl.hasAttr("mahuaImg")) {
+                    image.setIcon(iconEl.attr("mahuaImg"));
+                } else {
+                    image.setIcon(iconEl.attr("src"));
+                }
+
+                if (!"img".equals(imgEl.tagName())) {
+                    image.setContent(element.child(1).html());
+                    image.setImage(false);
+                    return images;
+                }
+
+                image.setImage(true);
+                if (imgEl.hasAttr("mahuaImg")) {
+
+                    image.setImage(imgEl.attr("mahuaImg"));
+                    image.setGif(false);
+
+                    if (imgEl.hasAttr("mahuaGifImg")) {
+                        image.setGif(true);
+                        image.setGifImg(imgEl.attr("mahuaGifImg"));
+                    }
+                } else {
+                    image.setImage(imgEl.attr("src"));
+                }
+
+
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
