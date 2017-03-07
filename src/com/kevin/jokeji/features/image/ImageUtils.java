@@ -66,7 +66,9 @@ public class ImageUtils {
 
 
     public static void loadImages(Context context, Image item, ImageView imageView
-            , ImageView iconView, String imgTag, String iconTag) {
+            , ImageView iconView) {
+        String imgTag = (String) imageView.getTag(R.id.imageloader_uri);
+        String iconTag = (String) iconView.getTag(R.id.imageloader_uri);
 
         if (!"1".equals(iconTag)) {
             //设置为已加载过数据
@@ -85,6 +87,22 @@ public class ImageUtils {
             imageView.setTag(R.id.imageloader_uri, "1");
             loadOriginRatioImage((Activity) context, item, imageView);
         }
+    }
+
+
+    public static void loadDefaultImages(Context context,Image item, ImageView imageView, ImageView iconView) {
+        imageView.setTag(R.id.imageloader_uri, item.getImage());
+        iconView.setTag(R.id.imageloader_uri, item.getIcon());
+        Glide.with(context)
+                .load(R.drawable.ic_default)
+                .crossFade()
+                .into(imageView);
+        Glide.with(context)
+                .load(R.drawable.ic_default)
+                .placeholder(R.drawable.ic_default)
+                .transform(new GlideRoundTransform(context))
+                .crossFade()
+                .into(iconView);
     }
 
 }

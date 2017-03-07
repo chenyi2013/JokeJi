@@ -110,13 +110,12 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
                     final Image item = (Image) view.getChildAt(i).getTag(R.id.imageloader_uri);
 
                     if (item.isImage()) {
+
                         final ImageView imageView = (ImageView) view.getChildAt(i).findViewById(R.id.img);
                         ImageView icon = (ImageView) view.getChildAt(i).findViewById(R.id.icon);
-                        String imgTag = (String) imageView.getTag(R.id.imageloader_uri);
-                        String iconTag = (String) icon.getTag(R.id.imageloader_uri);
-                        ImageUtils.loadImages(getActivity(), item, imageView, icon, imgTag, iconTag);
-                    }
+                        ImageUtils.loadImages(getActivity(), item, imageView, icon);
 
+                    }
                 }
 
                 break;
