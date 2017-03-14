@@ -1,7 +1,10 @@
 package com.kevin.jokeji.features.image;
 
 
+import android.content.Intent;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.kevin.jokeji.R;
@@ -46,6 +49,15 @@ public class ImageFragment extends BaseFragment implements BaseView<ArrayList<Im
     protected void setListener() {
         mRefreshLayout.setDelegate(this);
         mListView.setOnScrollListener(this);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ImageDetailActivity.class);
+                Image image = (Image) imageCommonAdapter.getItem(position);
+                intent.putExtra(ImageDetailActivity.IMAGE_URL, image.getImage());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

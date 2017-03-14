@@ -11,7 +11,7 @@
     <color name="holo_blue_bright">#ff00ddff</color>
     <color name="holo_orange_light">#ffffbb33</color>
     <color name="blue_bright">#33B5E5</color>
-    <item name="imageloader_uri" type="id"/>
+    <item name="imageloader_uri" type="id" />
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

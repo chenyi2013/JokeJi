@@ -27,6 +27,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.2.0'
     compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    compile 'com.taobao.android:weex_sdk:0.10.0@aar'
+
 }
 
 android {

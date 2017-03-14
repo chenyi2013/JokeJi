@@ -5,6 +5,10 @@ import android.app.Application;
 import com.kevin.jokeji.cache.CacheHelper;
 import com.kevin.jokeji.cache.DiskLruCache;
 import com.kevin.jokeji.config.Config;
+import com.kevin.jokeji.weex.NetworkAdapter;
+import com.kevin.jokeji.weex.WeexImageAdapter;
+import com.taobao.weex.InitConfig;
+import com.taobao.weex.WXSDKEngine;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +23,11 @@ public class JokeApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
+        InitConfig config = new InitConfig.Builder()
+                .setImgAdapter(new WeexImageAdapter())
+//                .setHttpAdapter(new NetworkAdapter())
+                .build();
+        WXSDKEngine.initialize(this, config);
     }
 
     public static synchronized DiskLruCache getDiskLruCache() {

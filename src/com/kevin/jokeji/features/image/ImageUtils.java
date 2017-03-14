@@ -34,7 +34,7 @@ public class ImageUtils {
                 .load(item.getImage())
                 .asBitmap()
                 .placeholder(R.drawable.ic_default)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
 
                     @Override
@@ -55,7 +55,7 @@ public class ImageUtils {
                                     .load(item.getGifImg())
                                     .asGif()
                                     .placeholder(new BitmapDrawable(bitmap))
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                                     .crossFade()
                                     .into(imageView);
                         } else {
