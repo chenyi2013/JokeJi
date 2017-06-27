@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#eaeaea" />
+
+    <RadioGroup
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp">
+
+        <RadioButton
+            android:id="@+id/last_new"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/main_tab_tool"
+            android:gravity="center"
+            android:text="最新"
+            android:textColor="@drawable/bottom_menu_color_list"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_tab_news"
+            android:gravity="center"
+            android:text="文字"
+            android:textColor="@drawable/bottom_menu_color_list"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/img"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_tab_emoji"
+            android:gravity="center"
+            android:text="图片"
+            android:textColor="@drawable/bottom_menu_color_list"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/main_tab_me"
+            android:gravity="center"
+            android:text="名言"
+            android:textColor="@drawable/bottom_menu_color_list"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,69 +1,14 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-    }
-}
-apply plugin: 'com.android.application'
+        classpath 'com.android.tools.build:gradle:2.3.2'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    'com.squareup.retrofit2:retrofit:2.0.2'
-
-
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.yalantis:phoenix:1.2.3'
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.alibaba:fastjson:1.1.55.android'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
-    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    compile 'com.taobao.android:weex_sdk:0.10.0@aar'
-
-}
-
-android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
-
-    defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 22
-        versionCode 2
-        versionName "1.0.1"
-    }
-
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-        }
-
-        // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
-
-        // Move the build types to build-types/<type>
-        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-        // This moves them out of them default location under src/<type>/... which would
-        // conflict with src/ being used by the main source set.
-        // Adding new build types or product flavors should be accompanied
-        // by a similar customization.
-        debug.setRoot('build-types/debug')
-        release.setRoot('build-types/release')
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
@@ -71,4 +16,8 @@ allprojects {
     repositories {
         jcenter()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
