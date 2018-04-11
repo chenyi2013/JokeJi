@@ -12,7 +12,6 @@ import com.kevin.jokeji.R;
 import com.kevin.jokeji.base.BaseActivity;
 import com.kevin.jokeji.config.URLS;
 import com.kevin.jokeji.features.hotjoke.HotJokeFragment;
-import com.kevin.jokeji.features.image.ImageFragment;
 import com.kevin.jokeji.features.saying.SayingContainerFragment;
 import com.kevin.jokeji.features.text.TextFragment;
 
@@ -24,7 +23,7 @@ public class MainActivity extends BaseActivity implements
     private RadioGroup mBottomMenu;
     private Fragment mNewFragment;
     private Fragment mTextFragment;
-    private Fragment mImageFragment;
+    //    private Fragment mImageFragment;
     private ViewPager mViewPager;
 
     private ArrayList<Fragment> fragments = new ArrayList<>();
@@ -42,12 +41,14 @@ public class MainActivity extends BaseActivity implements
     }
 
 
+    @Override
     protected void initView() {
 
         mBottomMenu = (RadioGroup) findViewById(R.id.bottom_menu);
         mBottomMenu.setOnCheckedChangeListener(this);
 
         mViewPager = (ViewPager) findViewById(R.id.content);
+        mViewPager.setOffscreenPageLimit(2);
 
 
         mNewFragment = new HotJokeFragment();
@@ -57,11 +58,11 @@ public class MainActivity extends BaseActivity implements
 
         mTextFragment = new TextFragment();
 
-        mImageFragment = new ImageFragment();
+//        mImageFragment = new ImageFragment();
 
         fragments.add(mNewFragment);
         fragments.add(mTextFragment);
-        fragments.add(mImageFragment);
+//        fragments.add(mImageFragment);
         fragments.add(new SayingContainerFragment());
 
         mViewPager.setAdapter(new JokeJiAdapter(getSupportFragmentManager()));

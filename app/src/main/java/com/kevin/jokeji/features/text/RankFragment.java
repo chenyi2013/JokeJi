@@ -28,6 +28,7 @@ public class RankFragment extends BaseFragment implements BaseView<ArrayList<Jok
     private CommonAdapter<Joke> mAdapter;
 
 
+    @Override
     protected void initView() {
 
         mAdapter = new CommonAdapter<Joke>(getActivity(), R.layout.frg_new_item_layout, null) {
@@ -77,7 +78,13 @@ public class RankFragment extends BaseFragment implements BaseView<ArrayList<Jok
 
     @Override
     public void showError() {
+        showErrorInfo();
+    }
 
+    @Override
+    protected void onRetry() {
+        super.onRetry();
+        loadData();
     }
 }
 

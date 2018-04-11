@@ -18,7 +18,7 @@ public class AwardsModel extends HtmlCommonModel<ArrayList<JokeItem>> {
 
     @Override
     protected boolean isUseCache() {
-        return true;
+        return false;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class AwardsModel extends HtmlCommonModel<ArrayList<JokeItem>> {
 
         try {
 
-            Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(30000).get();
 
             Element element = doc.getElementsByClass("jokeall_main").get(0);
 
@@ -76,6 +76,7 @@ public class AwardsModel extends HtmlCommonModel<ArrayList<JokeItem>> {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
 
         return jokes;

@@ -37,6 +37,7 @@ public class SayingContainerFragment extends BaseFragment {
         mPager = findViewById(R.id.view_pager);
         mTabLayout = findViewById(R.id.sliding_tab_layout);
         mPager.setAdapter(new SayingContainerAdapter(getChildFragmentManager()));
+        mPager.setOffscreenPageLimit(4);
         mTabLayout.setViewPager(mPager, mTitles);
     }
 

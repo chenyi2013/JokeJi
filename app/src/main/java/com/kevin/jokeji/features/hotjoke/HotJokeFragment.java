@@ -79,6 +79,7 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
         return R.layout.frg_new_layout;
     }
 
+    @Override
     protected void loadData() {
 
         showLoading();
@@ -103,8 +104,9 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
 
     @Override
-    public void showErrorInfo() {
-
+    protected void onRetry() {
+        super.onRetry();
+        loadData();
     }
 
     @Override
@@ -128,7 +130,7 @@ public class HotJokeFragment extends BaseFragment implements BaseView<ArrayList<
 
     @Override
     public void showError() {
-
+        showErrorInfo();
     }
 
     @Override

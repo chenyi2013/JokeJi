@@ -119,7 +119,13 @@ public class SayingFragment extends BaseFragment implements BaseView<ArrayList<S
 
     @Override
     public void showError() {
+        showErrorInfo();
+    }
 
+    @Override
+    protected void onRetry() {
+        super.onRetry();
+        loadData();
     }
 
     @Override

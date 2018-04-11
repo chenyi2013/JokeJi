@@ -12,7 +12,7 @@ public class URLS {
 
     public static final String AWARDS_URL = "http://www.jokeji.cn/joke_top.htm";
 
-    public static final String IMAGES_URL = "http://www.mahua.com/newjokes";
+    public static final String IMAGES_URL = "https://www.pengfu.com";
 
     public static final String SAYINGS[] = {
             "http://www.yikexun.cn/mrmy/list_31",

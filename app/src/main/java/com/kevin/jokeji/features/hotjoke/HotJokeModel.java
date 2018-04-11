@@ -37,7 +37,7 @@ public class HotJokeModel extends HtmlCommonModel<ArrayList<Joke>> {
 
 
         try {
-            Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(30000).get();
             Element content = doc.getElementsByClass("list_title").get(0);
             Elements lis = content.getElementsByTag("li");
 
@@ -53,6 +53,7 @@ public class HotJokeModel extends HtmlCommonModel<ArrayList<Joke>> {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
 
         return jokes;

@@ -19,7 +19,7 @@ public class RankModel extends HtmlCommonModel<ArrayList<Joke>> {
 
     @Override
     protected boolean isUseCache() {
-        return true;
+        return false;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class RankModel extends HtmlCommonModel<ArrayList<Joke>> {
 
         try {
 
-            Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(30000).get();
 
             Elements elements = doc.getElementsByClass("main_14");
 
@@ -48,8 +48,8 @@ public class RankModel extends HtmlCommonModel<ArrayList<Joke>> {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
 
-        return jokes;
     }
 }

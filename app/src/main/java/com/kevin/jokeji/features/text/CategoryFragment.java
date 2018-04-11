@@ -87,7 +87,13 @@ public class CategoryFragment extends BaseFragment implements BaseView<ArrayList
 
     @Override
     public void showError() {
+        showErrorInfo();
+    }
 
+    @Override
+    protected void onRetry() {
+        super.onRetry();
+        loadData();
     }
 
 }

@@ -37,6 +37,7 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
     }
 
 
+    @Override
     final public void loadData(String url, final boolean isRefresh) {
         try {
 
@@ -78,6 +79,11 @@ public abstract class HtmlCommonModel<T> implements BaseModel<T> {
                         public void call(T t) {
                             page++;
                             commonPresenter.onGetData(t, isRefresh);
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            commonPresenter.onError(new Exception());
                         }
                     });
 

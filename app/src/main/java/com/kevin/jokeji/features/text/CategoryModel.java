@@ -18,7 +18,7 @@ public class CategoryModel extends HtmlCommonModel<ArrayList<Category>> {
 
     @Override
     protected boolean isUseCache() {
-        return true;
+        return false;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CategoryModel extends HtmlCommonModel<ArrayList<Category>> {
 
         try {
 
-            Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(30000).get();
 
             Element element = doc.getElementById("classlist");
 
@@ -45,8 +45,10 @@ public class CategoryModel extends HtmlCommonModel<ArrayList<Category>> {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
 
         return categorys;
     }
+
 }

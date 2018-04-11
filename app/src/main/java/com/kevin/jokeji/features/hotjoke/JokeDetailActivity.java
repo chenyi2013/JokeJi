@@ -21,6 +21,7 @@ public class JokeDetailActivity extends BaseActivity implements BaseView<String>
     private CommonPresenter<String> mPresenter;
 
 
+    @Override
     protected void initView() {
 
         mJokeDetailTv = (TextView) findViewById(R.id.joke_detail);
@@ -35,6 +36,7 @@ public class JokeDetailActivity extends BaseActivity implements BaseView<String>
         mPresenter = new CommonPresenter<>(new JokeDetailModel(), this);
     }
 
+    @Override
     protected void loadData() {
         if (mJoke != null) {
             showLoading();
@@ -54,8 +56,14 @@ public class JokeDetailActivity extends BaseActivity implements BaseView<String>
     }
 
     @Override
-    public void showError() {
+    protected void onRetry() {
+        super.onRetry();
+        loadData();
+    }
 
+    @Override
+    public void showError() {
+        showErrorInfo();
     }
 
 

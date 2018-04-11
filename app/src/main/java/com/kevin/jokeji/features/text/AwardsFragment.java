@@ -92,7 +92,13 @@ public class AwardsFragment extends BaseFragment implements BaseView<ArrayList<J
 
     @Override
     public void showError() {
+        showErrorInfo();
+    }
 
+    @Override
+    protected void onRetry() {
+        super.onRetry();
+        loadData();
     }
 
 

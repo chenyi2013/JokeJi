@@ -33,7 +33,7 @@ public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
 
 
         try {
-            Document doc = Jsoup.connect(url).timeout(15000).get();
+            Document doc = Jsoup.connect(url).timeout(30000).get();
             Elements contents = doc.getElementsByClass("art-t");
 
 
@@ -54,6 +54,7 @@ public class SayingModel extends HtmlCommonModel<ArrayList<Saying>> {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
 
         return sayings;

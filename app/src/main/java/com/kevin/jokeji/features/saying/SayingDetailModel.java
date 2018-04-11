@@ -20,7 +20,7 @@ public class SayingDetailModel extends HtmlCommonModel<String> {
         String sayings = null;
 
         try {
-            Document doc = Jsoup.connect(ulr).timeout(15000).get();
+            Document doc = Jsoup.connect(ulr).timeout(30000).get();
             Elements contents = doc.getElementsByClass("neirong");
             contents
                     .get(0)
@@ -41,6 +41,7 @@ public class SayingDetailModel extends HtmlCommonModel<String> {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
         return sayings;
     }

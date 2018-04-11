@@ -23,6 +23,7 @@ public class TextFragment extends BaseFragment implements OnCheckedChangeListene
     protected void initView() {
         mViewPager = findViewById(R.id.view_pager);
         mViewPager.addOnPageChangeListener(this);
+        mViewPager.setOffscreenPageLimit(2);
         mTopMenu = findViewById(R.id.top_menu);
     }
 

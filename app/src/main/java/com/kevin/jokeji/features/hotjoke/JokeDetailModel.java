@@ -27,7 +27,7 @@ public class JokeDetailModel extends HtmlCommonModel<String> {
 
             String str = URLEncoder.encode("冷笑话", "utf-8");
             url = url.replace("冷笑话", str);
-            Document doc = Jsoup.connect(url).timeout(5000).get();
+            Document doc = Jsoup.connect(url).timeout(30000).get();
 
             Element element = doc.getElementById("text110");
 
@@ -40,8 +40,8 @@ public class JokeDetailModel extends HtmlCommonModel<String> {
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException();
         }
 
-        return "";
     }
 }

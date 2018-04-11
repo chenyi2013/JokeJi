@@ -47,21 +47,21 @@
             android:button="@null"
             android:drawableTop="@drawable/main_tab_news"
             android:gravity="center"
-            android:text="文字"
+            android:text="笑话"
             android:textColor="@drawable/bottom_menu_color_list"
             android:textSize="12sp" />
 
-        <RadioButton
-            android:id="@+id/img"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/main_tab_emoji"
-            android:gravity="center"
-            android:text="图片"
-            android:textColor="@drawable/bottom_menu_color_list"
-            android:textSize="12sp" />
+        <!--<RadioButton-->
+            <!--android:id="@+id/img"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:button="@null"-->
+            <!--android:drawableTop="@drawable/main_tab_emoji"-->
+            <!--android:gravity="center"-->
+            <!--android:text="图片"-->
+            <!--android:textColor="@drawable/bottom_menu_color_list"-->
+            <!--android:textSize="12sp" />-->
 
         <RadioButton
             android:layout_width="0dp"
